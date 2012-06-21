@@ -1,4 +1,4 @@
-=== Kevinjohn Gallagher: Pure Web Brilliant's Social Graph Control ===
+=== Kevinjohn Gallagher: Pure Web Brilliant's Social Graph Twitter Cards Extention ===
 	Contributors:			kevinjohngallagher, purewebbrilliant 
 	Donate link:			http://kevinjohngallagher.com/
 	Tags: 					kevinjohn gallagher, pure web brilliant, framework, cms, facebook, opengraph, social, social media, twitter, twitter cards, google+
