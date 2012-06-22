@@ -12,7 +12,7 @@ Adds Twitter Card's Open Graph meta tags to your WordPress header
 
 == Description ==
 
-Adds teh following tags to your website's header where appropriate
+Adds the following tags to your website's header where appropriate
 
 * twitter:card
 * twitter:title
@@ -55,6 +55,23 @@ It can be found at http://wordpress.org/extend/plugins/kevinjohn-gallagher-pure-
 
 == Changelog ==
 
+= 0.7 =
+
+= 0.7 =
+
+* tidying of __construct
+* streamlining of init_child
+* Added hook: _child_settings_sections__kevinjohn_gallagher___social_graph_control
+* Added hook: _child_settings_array__kevinjohn_gallagher___social_graph_control
+* Added hook: _social_graph_data_get___kevinjohn_gallagher___social_graph_control
+* Added hook: _social_graph_data_set___kevinjohn_gallagher___social_graph_control
+* Fixed a number of $this to $parent options to de-duplicate code.
+* Correctly referenced the Parent/Control plug-ins options in get_options(), and not added additional data to the database  
+* Setarated GET and SET methods for data storage.
+* Added warning that Facebok Page ID has been deprecated by Facebook as of 1st April 2012. I'll keep it in until the end of the year though.
+
+
+
 = 0.5 =
 * Publish to WP.org repository.
 * twitter:card
@@ -66,6 +83,8 @@ It can be found at http://wordpress.org/extend/plugins/kevinjohn-gallagher-pure-
 * twitter:creator
 * twitter:creator:id
 * twitter:image
+* Added "Twitter username" option to user profile
+* Added "Twitter user ID" option to user profile
 
 
 

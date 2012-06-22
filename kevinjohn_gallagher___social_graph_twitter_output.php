@@ -2,7 +2,7 @@
 /*
 	Plugin Name: 			Kevinjohn Gallagher: Pure Web Brilliant's Social Graph Twitter Cards Extention
 	Description: 			Adds Twitter Card's Open Graph meta tags to your WordPress header
-	Version: 				0.5
+	Version: 				0.6
 	Author: 				Kevinjohn Gallagher
 	Author URI: 			http://kevinjohngallagher.com/
 	
@@ -11,7 +11,7 @@
 	Tags: 					kevinjohn gallagher, pure web brilliant, framework, cms, facebook, opengraph, social, social media, twitter, twitter cards, google+
 	Requires at least:		3.0
 	Tested up to: 			3.4
-	Stable tag: 			0.5
+	Stable tag: 			0.6
 */
 /**
  *
@@ -38,7 +38,7 @@
  *
  *
  *	@package				Pure Web Brilliant
- *	@version 				0.5
+ *	@version 				0.6
  *	@author 				Kevinjohn Gallagher <wordpress@kevinjohngallagher.com>
  *	@copyright 				Copyright (c) 2012, Kevinjohn Gallagher
  *	@link 					http://kevinjohngallagher.com
@@ -47,7 +47,7 @@
  *
  */
 
-	define( '_kevinjohn_gallagher___social_graph_twitter_extention', '0.5' );
+	define( '_kevinjohn_gallagher___social_graph_twitter_extention', '0.6' );
 
 
 
@@ -91,18 +91,15 @@
 				public	function	__construct() 
 				{
 						$this->instance 								=	&$this;
+						$this->plugin_dir								=	plugin_dir_path(__FILE__);	
+						$this->plugin_url								=	plugin_dir_url(__FILE__);				
+						
 						$this->plugin_name								=	"Kevinjohn Gallagher: Pure Web Brilliant's Social Graph Twitter extention";
 						
 						
 						add_action( 'init',									array( $this, 'init' ) );
 						add_action( 'init',									array( $this, 'init_child' ) );
-						add_action(	'admin_init',							array( $this, 'admin_init_register_settings'), 100);
 					
-						add_filter( 'kjg_pwb_child_setting_sections', 		array( $this, 'hook_into___kjg_pwb_child_setting_sections'), 	100, 	2);
-						add_filter( 'kjg_pwb_child_setting_array', 			array( $this, 'hook_into___kjg_pwb_child_setting_array'), 		100, 	2);
-						
-						
-						add_action( 'kjg_pwb_social_graph_data', 			array( $this, 'hook_into__kjg_pwb_social_graph_data'), 		100, 	3);	
 												
 				}
 				
@@ -118,78 +115,102 @@
 			
 				public function init_child() 
 				{
-						$this->plugin_dir										=	plugin_dir_path(__FILE__);	
-						$this->plugin_url										=	plugin_dir_url(__FILE__);				
-				
-						$this->child_settings_sections 							=	array();
-						$this->child_settings_array 							=	array();
-						
-					//	$this->define_child_settings();
-						
 
-						add_filter(	'user_contactmethods',						array( 	&$this, 	'modernise_contacts'), 				100, 	1);
+					
+						add_filter( 	'kjg_pwb_hook_child_settings_sections__kevinjohn_gallagher___social_graph_control', 
+										array(	
+												$this, 
+												'hook_into___kjg_pwb_hook_child_settings_sections__kevinjohn_gallagher___social_graph_control'
+											), 	
+										100, 	
+										1
+									);
+
+
+						add_filter( 	'kjg_pwb_hook_child_settings_array__kevinjohn_gallagher___social_graph_control', 
+										array(	
+												$this, 
+												'hook_into___kjg_pwb_hook_child_settings_array__kevinjohn_gallagher___social_graph_control'
+											), 	
+										100, 	
+										1
+									);
+
+
+
+						add_filter( 	'kjg_pwb_hook_social_graph_data_get___kevinjohn_gallagher___social_graph_control', 
+										array(	
+												$this, 
+												'hook_into___kjg_pwb_hook_social_graph_data_get___kevinjohn_gallagher___social_graph_control'
+											), 	
+										100, 	
+										2
+									);					
+
+
+						add_filter( 	'kjg_pwb_hook_social_graph_data_set___kevinjohn_gallagher___social_graph_control', 
+										array(	
+												$this, 
+												'hook_into___kjg_pwb_hook_social_graph_data_set___kevinjohn_gallagher___social_graph_control'
+											), 	
+										100, 	
+										2
+									);	
+									
+	
+
+						add_filter(		'user_contactmethods',						array( 	&$this, 	'modernise_contacts'), 				100, 	1);
 				}
 				
 				
 
-				public 	function 	hook_into___kjg_pwb_child_setting_sections($args, $class)
+						
+
+
+				public 	function 	hook_into___kjg_pwb_hook_child_settings_sections__kevinjohn_gallagher___social_graph_control($args)
+				{
+						$this->child_settings_sections['section_tw']			= ' Twitter: ';
+						
+						$args 													= 	array_merge($args, $this->child_settings_sections);
+						
+						return $args;					
+				}
+
+
+				
+
+				public 	function 	hook_into___kjg_pwb_hook_child_settings_array__kevinjohn_gallagher___social_graph_control($args)
 				{
 				
-						if( $class == '_kevinjohn_gallagher___social_graph_control' )
-						{
-								$this->child_settings_sections['section_tw']					= ' Twitter: ';
-								
-								$args 		= 	array_merge($args, $this->child_settings_sections);
+						$this->child_settings_array['twitter_site_name'] 	= array(
+																				'id'      		=> 'twitter_site_name',
+																				'title'   		=> 'Twitter site username:',
+																				'description'	=> 'e.g. @KevinjohnG is the name for "KevinjohnGallagher.com" ',
+																				'type'    		=> 'text',
+																				'section' 		=> 'section_tw',
+																				'choices' 		=> array(																	
+																									),
+																				'class'   		=> ''
+																			);
+
+
+						$this->child_settings_array['twitter_site_id'] 	= array(
+																				'id'      		=> 'twitter_site_id',
+																				'title'   		=> 'Twitter site id:',
+																				'description'	=> 'Note that user ids never change, while @usernames can be changed by the user. ',
+																				'type'    		=> 'text',
+																				'section' 		=> 'section_tw',
+																				'choices' 		=> array(																	
+																									),
+																				'class'   		=> ''
+																			);
 						
-						}
+						$args 		= 	array_merge($args, $this->child_settings_array);
+						
 						
 						return $args;
 					
-				}
-
-						
-										
-
-
-				public 	function 	hook_into___kjg_pwb_child_setting_array($args, $class)
-				{
-				
-						if( $class == '_kevinjohn_gallagher___social_graph_control' )
-						{
-								$this->child_settings_array['twitter_site_name'] 	= array(
-																						'id'      		=> 'twitter_site_name',
-																						'title'   		=> 'Twitter site username:',
-																						'description'	=> 'e.g. @KevinjohnG is the name for "KevinjohnGallagher.com" ',
-																						'type'    		=> 'text',
-																						'section' 		=> 'section_tw',
-																						'choices' 		=> array(																	
-																											),
-																						'class'   		=> ''
-																					);
-		
-		
-								$this->child_settings_array['twitter_site_id'] 	= array(
-																						'id'      		=> 'twitter_site_id',
-																						'title'   		=> 'Twitter site id:',
-																						'description'	=> 'Note that user ids never change, while @usernames can be changed by the user. ',
-																						'type'    		=> 'text',
-																						'section' 		=> 'section_tw',
-																						'choices' 		=> array(																	
-																											),
-																						'class'   		=> ''
-																					);
-								
-								$args 		= 	array_merge($args, $this->child_settings_array);
-						
-						}
-						
-						
-						return $args;
-					
-				}
-				
-				
-				
+				}				
 
 				
 				
@@ -340,11 +361,12 @@
 				 
 				public 		function  	define_page_twitter_site( $post, $parent )
 				{
-						$this->site_twitter					=		esc_attr( $this->plugin_options['twitter_site_name'] );
-						$this->site_twitter_id				=		esc_attr( $this->plugin_options['twitter_site_id'] );
+						$this->site_twitter					=		esc_attr( $parent->plugin_options['twitter_site_name'] );
+						$this->site_twitter_id				=		esc_attr( $parent->plugin_options['twitter_site_id'] );
 						
 						$parent->site_twitter				=		$this->ensure_twitter_at_symbol( $this->site_twitter );
 						$parent->site_twitter_id			=		$this->is_numeric_or_empty( $this->site_twitter_id );
+						
 				}
 				
 
@@ -430,13 +452,21 @@
 				 * 		@param  	string $image_html
 				 * 		@return		string
 				 */
-				public	function	hook_into__kjg_pwb_social_graph_data( $parent, $post, $class  )
+				public 	function 	hook_into___kjg_pwb_hook_social_graph_data_get___kevinjohn_gallagher___social_graph_control( $parent, $post )
 				{
+					
 						$this->define_page_twitter_cards( $post, $parent );
+				}
+
+
+
+				public 	function 	hook_into___kjg_pwb_hook_social_graph_data_set___kevinjohn_gallagher___social_graph_control( $parent, $post )
+				{
+					
 						$this->set_page_twitter_cards( $post, $parent );
 						
 				}
-				
+
 				
 				
 		
