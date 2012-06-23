@@ -4,7 +4,7 @@
 	Tags: 					kevinjohn gallagher, pure web brilliant, framework, cms, facebook, opengraph, social, social media, twitter, twitter cards, google+
 	Requires at least:		3.0
 	Tested up to: 			3.4
-	Stable tag: 			0.5
+	Stable tag: 			0.75
 
 
 
@@ -12,7 +12,7 @@ Adds Twitter Card's Open Graph meta tags to your WordPress header
 
 == Description ==
 
-Adds teh following tags to your website's header where appropriate
+Adds the following tags to your website's header where appropriate
 
 * twitter:card
 * twitter:title
@@ -55,9 +55,8 @@ It can be found at http://wordpress.org/extend/plugins/kevinjohn-gallagher-pure-
 
 == Changelog ==
 
-= 0.7 =
 
-= 0.7 =
+= 0.75 =
 
 * tidying of __construct
 * streamlining of init_child

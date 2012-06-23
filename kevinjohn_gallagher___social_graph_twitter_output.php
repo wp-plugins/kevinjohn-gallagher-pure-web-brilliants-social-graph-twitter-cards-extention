@@ -2,7 +2,7 @@
 /*
 	Plugin Name: 			Kevinjohn Gallagher: Pure Web Brilliant's Social Graph Twitter Cards Extention
 	Description: 			Adds Twitter Card's Open Graph meta tags to your WordPress header
-	Version: 				0.6
+	Version: 				0.75
 	Author: 				Kevinjohn Gallagher
 	Author URI: 			http://kevinjohngallagher.com/
 	
@@ -11,7 +11,7 @@
 	Tags: 					kevinjohn gallagher, pure web brilliant, framework, cms, facebook, opengraph, social, social media, twitter, twitter cards, google+
 	Requires at least:		3.0
 	Tested up to: 			3.4
-	Stable tag: 			0.6
+	Stable tag: 			0.75
 */
 /**
  *
@@ -38,7 +38,7 @@
  *
  *
  *	@package				Pure Web Brilliant
- *	@version 				0.6
+ *	@version 				0.75
  *	@author 				Kevinjohn Gallagher <wordpress@kevinjohngallagher.com>
  *	@copyright 				Copyright (c) 2012, Kevinjohn Gallagher
  *	@link 					http://kevinjohngallagher.com
@@ -47,7 +47,7 @@
  *
  */
 
-	define( '_kevinjohn_gallagher___social_graph_twitter_extention', '0.6' );
+	define( '_kevinjohn_gallagher___social_graph_twitter_extention', '0.75' );
 
 
 
