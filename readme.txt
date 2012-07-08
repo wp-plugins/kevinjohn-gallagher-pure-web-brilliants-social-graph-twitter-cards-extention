@@ -1,10 +1,10 @@
-=== Kevinjohn Gallagher: Pure Web Brilliant's Social Graph Twitter Cards Extention ===
+=== Pure Web Brilliant's Social Graph Twitter Cards Extention ===
 	Contributors:			kevinjohngallagher, purewebbrilliant 
 	Donate link:			http://kevinjohngallagher.com/
 	Tags: 					kevinjohn gallagher, pure web brilliant, framework, cms, facebook, opengraph, social, social media, twitter, twitter cards, google+
 	Requires at least:		3.0
 	Tested up to: 			3.4
-	Stable tag: 			0.75
+	Stable tag: 			0.8
 
 
 
@@ -54,6 +54,10 @@ It can be found at http://wordpress.org/extend/plugins/kevinjohn-gallagher-pure-
 
 
 == Changelog ==
+
+
+= 0.8 =
+* Updated security check
 
 
 = 0.75 =
